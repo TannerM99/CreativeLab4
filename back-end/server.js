@@ -22,6 +22,7 @@ mongoose.connect('mongodb://localhost:27017/test', {
 const ticketSchema = new mongoose.Schema({
   name: String,
   problem: String,
+  type: String
 });
 
 ticketSchema.virtual('id')
@@ -50,7 +51,8 @@ app.get('/api/tickets', async (req, res) => {
 app.post('/api/tickets', async (req, res) => {
   const ticket = new Ticket({
     name: req.body.name,
-    problem: req.body.problem
+    problem: req.body.problem,
+    type: req.body.type
   });
   try {
     await ticket.save();
